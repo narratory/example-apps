@@ -1,6 +1,6 @@
 # Narratory example apps
 
-Example skills for the [Narratory tool](https://narratory.io/). Contributions welcome from everyone, just send a PR!
+Example skills for the [Narratory tool](https://narratory.io/). Contributions welcome, send a PR!
 
 # Contents
 
@@ -12,7 +12,9 @@ Flightbooker          | Allowing you to book flights                | Slot-filli
 1. Clone the repository, `git clone https://github.com/narratory/example-apps`.
 2. Go into the folder of the app you want to test, for example `cd flightbooker`.
 3. Run `npm install` to install dependencies.
-4. Add your Google credentials and Narratory key to the `src/agent.ts` file (see [Narratory docs on setup](https://narratory.io/docs/setup))
+4. Set up credentials and fulfillment url (see [Narratory docs on setup](https://narratory.io/docs/setup))
+    * Add your Google credentials and Narratory key to the `src/agent.ts` file
+    * Add the Narratory fulfillment url to your Dialogflow agent
 5. Create your agent and start an interactive chat-prompt in the terminal with `npm run start`
 
 # Documentation
