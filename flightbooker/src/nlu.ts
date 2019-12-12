@@ -12,6 +12,10 @@ export const travel: Intent = {
     examples: [
         "book a flight",
         "book tickets to _toCity",
+        "_toCity",
+        "to _toCity",
+        "to _toCity from _fromCity",
+        "going to _toCity from _fromCity",
         "I want to book a flight",
         "I want to book tickets",
         "I want to book _tickets tickets to _toCity",

@@ -1,7 +1,7 @@
 {
-  "name": "narratory-starter",
-  "version": "0.0.1",
-  "description": "A start-kit to start building chat and voice interactions using the Narratory service",
+  "name": "narratory-flight-booker",
+  "version": "0.1.0",
+  "description": "A flight-booking example app for Narratory. Check out narratory.io for more examples and docs.",
   "main": "out/index.js",
   "watch": {
     "updateEntities": {
@@ -25,7 +25,7 @@
   "license": "ISC",
   "dependencies": {
     "@types/node": "^12.12.7",
-    "narratory": "0.0.34",
+    "narratory": "0.0.35",
     "npm-watch": "^0.6.0"
   },
   "devDependencies": {

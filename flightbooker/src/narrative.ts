@@ -1,4 +1,4 @@
-import { BotTurn, Intent, ANYTHING, EXIT } from "narratory"
+import { BotTurn, ANYTHING, EXIT } from "narratory"
 import * as intents from "./nlu"
 import user from "./user"
 
@@ -53,37 +53,48 @@ const askFrom: BotTurn = {
 
 const confirm: BotTurn = {
     say: "A flight from _fromCity to _toCity for _tickets people sounds lovely. Does that seem right?", answers: [
-        { intent: intents.travelFrom, followup: {
-            say: "Ok, sorry. _fromCity it is. Otherwise we are good?",
-            repair: true
-        }},
-        { intent: intents.travelTo, followup: {
-            say: "Ok, sorry. Going to _toCity. Otherwise we are good?",
-            repair: true
-        }},
-        { intent: intents.peopleTravelling, followup: {
-            say: "Alright. _tickets tickets. Does it sound good otherwise?",
-            repair: true
-        }},
-        { intent: ["No", "It is not good", "wrong"], followup: {
-            say: "Okay. What do you want to correct?",
-            repair: true
-        }},
         {
-            intent: ["It is ok", "OK", "great", "yes"], followup: [{
-                cond: { toCity: "Paris" },
-                say: "are you really sure? _toCity is a dodgy place y'know",
-                answers: [
-                    { intent: [...intents.Yes.examples, "shut up", "I am sure"], followup: ["ok, I warned you", "remember I warned you"] },
-                    {
-                        intent: [...intents.No.examples, "You are right"], followup: {
-                            say: "That's what I thought. But, let's move on anyway.",
-                        }
+            intent: intents.travelFrom, followup: {
+                say: "Ok, sorry. _fromCity it is. Otherwise we are good?",
+                repair: true
+            }
+        },
+        {
+            intent: intents.travelTo, followup: {
+                say: "Ok, sorry. Going to _toCity. Otherwise we are good?",
+                repair: true
+            }
+        },
+        {
+            intent: intents.peopleTravelling, followup: {
+                say: "Alright. _tickets tickets. Does it sound good otherwise?",
+                repair: true
+            }
+        },
+        {
+            intent: ["No", "It is not good", "wrong"], followup: {
+                say: "Okay. What do you want to correct?",
+                repair: true
+            }
+        },
+        {
+            intent: ["It is ok", "OK", "great", "yes"], followup: {
+                orderType: "BOOK",
+                name: "A flight to _toCity",
+                description: "_tickets tickets to _toCity from _fromCity",
+                confirmationText: "Flight booked",
+                onConfirmed: {
+                    say: "Awesome, order sent",
+                    set: {
+                        booked: true
                     }
-                ]
-            }, {
-                say: "great!"
-            }]
+                    // url: "my_url",
+                    // params: ["toCity", "fromCity", "tickets"], 
+                },
+                onCancelled: {
+                    say: "Okay. Order cancelled"
+                }
+            }
         },
         {
             intent: ["Abort"], followup: {
@@ -93,21 +104,12 @@ const confirm: BotTurn = {
     ]
 }
 
-const booking: BotTurn = {
-    cond: { fromCity: true, toCity: true, tickets: true },
-    say: "I got all I need. Now processing a booking",
-    // A booking would be done here with an API-call
-    set: {
-        booked: true
-    }
-}
-
 const anotherBooking: BotTurn = {
     say: "Do you want to do another booking?",
     answers: [
         {
             intent: intents.Yes, followup: {
-                say: "okay. Where to next?",
+                say: "okay. So where are you going next?",
                 set: {
                     toCity: null,
                     fromCity: null,
@@ -135,4 +137,4 @@ const happyFlight: BotTurn = {
 
 const bye = ["Hope to see you again. Bye!"]
 
-export default [greeting, intro, askTickets, askTo, askFrom, confirm, booking, anotherBooking, happyFlight, bye]
+export default [greeting, intro, askTickets, askTo, askFrom, confirm, anotherBooking, happyFlight, bye]

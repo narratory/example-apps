@@ -3,7 +3,7 @@ import questions from "./questions"
 import { Agent, Language } from "narratory"
 
 const agent: Agent = {
-    agentName: "Flightbooker",
+    agentName: "Narratory Flightbooker",
     language: Language.English,
     narrative,
     questions,
