@@ -6,7 +6,7 @@ Example skills for the [Narratory tool](https://narratory.io/). Contributions we
 
 Skill                 | Description                                 | Concepts showcased
 ----------------------|---------------------------------------------|------------------------------------------------------
-Flightbooker          | Allowing you to book flights                | Slot-filling, see [Narratory docs on slot-filling](https://narratory.io/docs/slot-filling)
+Flightbooker          | Allowing you to book flights                | Slot-filling, [see docs](https://narratory.io/docs/slot-filling) and transactions, [see docs](https://narratory.io/docs/transactions)
 
 # Running apps
 1. Clone the repository, `git clone https://github.com/narratory/example-apps`.
