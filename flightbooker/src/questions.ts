@@ -9,7 +9,7 @@ import user from "./user"
 
 // Intent to be used as an implicid invocation phrase
 const bookFlightIntent: UserTurn = {
-    intent: intents.travel, followup: {
+    intent: intents.travel, bot: {
         say: ["Absolutely", "Of course"],
         goto: ASK_TICKETS
     }
@@ -17,7 +17,7 @@ const bookFlightIntent: UserTurn = {
 
 const exitIntent: UserTurn = {
     intent: ["exit", "stop"],
-    followup: {
+    bot: {
         say: "Okay, bye bye!",
         goto: EXIT
     }
@@ -25,7 +25,7 @@ const exitIntent: UserTurn = {
 
 const costQueryIntent: UserTurn = {
     intent: intents.costQuery, 
-    followup: `I don't know yet unfortunately! In the future, I might be connected to an API to be able to help you with this`
+    bot: `I don't know yet unfortunately! In the future, I might be connected to an API to be able to help you with this`
 }
 
 export default [bookFlightIntent, costQueryIntent, exitIntent]
