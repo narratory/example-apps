@@ -1,10 +1,9 @@
 import { UserTurn, EXIT } from "narratory"
 import * as intents from "./nlu"
 import { ASK_TICKETS } from "./narrative"
-import user from "./user"
 
 /*
-    Questions and other user-driven initiatives
+    User-driven initiatives
 */
 
 // Intent to be used as an implicid invocation phrase

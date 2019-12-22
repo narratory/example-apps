@@ -37,7 +37,7 @@ export const travel: Intent = {
 }
 
 export const peopleTravelling: Intent = {
-    examples: ["_tickets", "_tickets people", "_tickets tickets"],
+    examples: ["_tickets", "_tickets people", "_tickets tickets", "we are _tickets"],
     entities: {
         tickets: entities.numberInteger
     }
