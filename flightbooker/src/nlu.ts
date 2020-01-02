@@ -27,7 +27,8 @@ export const travel: Intent = {
         "I want to fly to _toCity",
         "I want to fly from _fromCity",
         "I wanna fly to _toCity",
-        "I wanna fly from _fromCity to _toCity"
+        "I wanna fly from _fromCity to _toCity",
+        "I wanna fly to _toCity from _fromCity"
     ],
     entities: {
         tickets: entities.numberInteger,

@@ -1,6 +1,6 @@
 {
   "name": "narratory-flight-booker",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "A flight-booking example app for Narratory. Check out narratory.io for more examples and docs.",
   "main": "out/index.js",
   "watch": {
@@ -25,7 +25,7 @@
   "license": "ISC",
   "dependencies": {
     "@types/node": "^12.12.21",
-    "narratory": "^0.3.0",
+    "narratory": "^0.3.2",
     "npm-watch": "^0.6.0"
   },
   "devDependencies": {
