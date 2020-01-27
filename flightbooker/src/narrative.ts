@@ -5,7 +5,8 @@ import user from "./user"
 const greeting = ["Hi there", "Hello", "Hi"]
 
 const intro: BotTurn = {
-    say: "Do you want to book a flight?", user: [
+    say: ["Do you want to book a flight?", "How about booking a flight?"], 
+    user: [
         { intent: intents.Yes, bot: "Alright" },
         {
             intent: intents.No, bot: {
