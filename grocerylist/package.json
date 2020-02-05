@@ -1,0 +1,36 @@
+{
+  "name": "narratory-flight-booker",
+  "version": "0.2.1",
+  "description": "A flight-booking example app for Narratory. Check out narratory.io for more examples and docs.",
+  "config": {
+    "agent": "agent.ts"
+  },
+  "scripts": {
+    "start": "tsc && node node_modules/narratory/out/cmd/start.js",
+    "build": "tsc && node node_modules/narratory/out/cmd/build.js",
+    "chat": "node node_modules/narratory/out/cmd/chat.js",
+    "updateEntities": "node node_modules/narratory/out/generators/scanner.js",
+    "watch": "tsc --watch"
+  },
+  "watch": {
+    "updateEntities": {
+      "patterns": [
+        "src"
+      ],
+      "ignore": "src/user.ts",
+      "quiet": true,
+      "extensions": "ts"
+    }
+  },
+  "author": "luddilo",
+  "license": "ISC",
+  "dependencies": {
+    "@types/node": "^12.12.21",
+    "narratory": "file:../../narratory",
+    "npm-watch": "^0.6.0"
+  },
+  "devDependencies": {
+    "concurrently": "^5.0.2",
+    "typescript": "^3.7.4"
+  }
+}
