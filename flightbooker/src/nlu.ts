@@ -38,21 +38,21 @@ export const travel: Intent = {
 }
 
 export const peopleTravelling: Intent = {
-    examples: ["_tickets", "_tickets people", "_tickets tickets", "we are _tickets"],
+    examples: ["_tickets", "_tickets people", "_tickets tickets", "we are _tickets", "no we are _tickets", "no _tickets"],
     entities: {
         tickets: entities.numberInteger
     }
 }
 
 export const travelFrom: Intent = {
-    examples: ["I want to go from _fromCity", "I want to fly from _fromCity", "_fromCity", "from _fromCity"],
+    examples: ["I want to go from _fromCity", "I want to fly from _fromCity", "_fromCity", "from _fromCity", "no from _fromCity", "no, going from _fromCity"],
     entities: {
         fromCity: entities.geoCity,
     }
 }
 
 export const travelTo: Intent = {
-    examples: ["I want to go to _toCity", "I want to fly to _toCity", "_toCity", "to _toCity"],
+    examples: ["I want to go to _toCity", "I want to fly to _toCity", "_toCity", "to _toCity", "no to _toCity", "no, going to _toCity"],
     entities: {
         toCity: entities.geoCity,
     }

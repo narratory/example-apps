@@ -21,7 +21,6 @@ const exitIntent: UserTurn = {
         goto: EXIT
     }
 }
-
 const costQueryIntent: UserTurn = {
     intent: intents.costQuery, 
     bot: `I don't know yet unfortunately! In the future, I might be connected to an API to be able to help you with this`
