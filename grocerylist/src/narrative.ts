@@ -76,6 +76,12 @@ const modifyList: BotTurn = {
       }
     },
     {
+      intent: intents.NotSure,
+      bot: {
+        say: "No problems. Take your time"
+      }
+    },
+    {
       intent: intents.No,
       bot: {
         say: "Alright",

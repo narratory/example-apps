@@ -8,6 +8,10 @@ export const No: Intent = {
     examples: ["no", "never", "nope", "I don't think so"]
 }
 
+export const NotSure: Intent = {
+    examples: ["not sure", "I don't know", "no idea"]
+}
+
 export const product : Entity = {
     name: "product",
     enums: [
@@ -38,7 +42,8 @@ export const removeProductsFromList : Intent = {
         "Remove _product",
         "Remove _product and _product",
         "I don't want _product",
-        "Take away _product"
+        "Take away _product",
+        "take off _product"
     ]
 }
 
@@ -63,7 +68,8 @@ export const queryProducts : Intent = {
         "tell me what I can buy",
         "what can I buy",
         "what is in stock",
-        "what groceries do you have"
+        "what groceries do you have",
+        "what can I add"
     ]
 }
 

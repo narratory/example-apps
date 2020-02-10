@@ -26,7 +26,7 @@
   "license": "ISC",
   "dependencies": {
     "@types/node": "^12.12.21",
-    "narratory": "file:../../narratory",
+    "narratory": "^0.5.4",
     "npm-watch": "^0.6.0"
   },
   "devDependencies": {
