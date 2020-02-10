@@ -1,4 +1,4 @@
-import { Intent, Entity } from "narratory"
+import { Intent, Entity, entities } from "narratory"
 
 export const Yes: Intent = {
     examples: ["yeah", "yes", "of course", "absolutely"]
@@ -25,13 +25,34 @@ export const product : Entity = {
 
 export const addProductsToList : Intent = {
     entities: {
-        product
+        product,
+        unknown: entities.any
     },
     examples: [
         "I want _product and _product",
+        "I want _product and _unknown",
+        "I want _unkown and _product",
+        "add _product",
         "add _product and _product",
-        "_product, _product and _product"
+        "add _product and _unknown",
+        "add _unknown and _product",
+        "_product, _product and _product",
+        "_product and _product",
+        "_product and _unknown",
+        "_unknown and _product"
     ]
+}
+
+export const addUnknownToList : Intent = {
+    entities: {
+        unknown: entities.any
+    },
+    examples: [
+        "I want _unknown",
+        "add _unknown",
+        "add _unknown and _unknown"
+    ]
+    
 }
 
 export const removeProductsFromList : Intent = {

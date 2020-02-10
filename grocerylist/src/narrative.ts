@@ -22,16 +22,33 @@ const modifyList: BotTurn = {
   },
   user: [
     {
-      intent: intents.addProductsToList,
+      intent: intents.addProductsToList, // User gave us atleast one product in stock
       bot: {
         say: [
-          "Absolutely. _product.",
-          "Okay, adding _product to the list.",
-          "Great, _product. List is now _groceryList."
+          {
+            cond: { unknown: null }, // User only gave us products we have in stock
+            text: [
+              "Absolutely. _product.",
+              "Okay, adding _product to the list.",
+              "Great, _product. List is now _groceryList."
+            ]
+          },
+          { // User also gave us some unknown input, likely a product not in stock
+            text: [
+              "Ok. _product made the list but I don't have _unknown unfortunately",
+              "Added _product but couldn't add _unknown since we don't have it"
+            ]
+          }
         ],
         set: {
           groceryList: "+_product"
         }
+      }
+    },
+    {
+      intent: intents.addUnknownToList, // User didn't give us any product we have in stock
+      bot: {
+        say: "We don't have that unfortunately. We have " + intents.productsAsList() + " in stock"
       }
     },
     {
@@ -69,7 +86,7 @@ const modifyList: BotTurn = {
                 groceryList: null
               },
               say: "As you wish! List is empty. What do you want to add to it?",
-              repair: "PARENT" // Since we don't want to execute the addMore turn below
+              repair: "PARENT" // Since we don't want to execute the continueModifying turn below
             }
           }
         ]
@@ -107,6 +124,6 @@ const summary: BotTurn = {
   say: ["The final list is _groceryList", "Now, your list is _groceryList"]
 }
 
-const goodbye = "Goodbye for now!"
+const goodbye = "Thank you and goodbye for now!"
 
 export default [greeting, purpose, modifyList, continueModifying, summary, goodbye]
