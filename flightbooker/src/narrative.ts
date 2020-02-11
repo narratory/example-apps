@@ -1,31 +1,21 @@
 import { BotTurn, ANYTHING, EXIT } from "narratory"
 import * as intents from "./nlu"
-import user from "./user"
+import { ASK_TICKETS } from "./util"
 
 const greeting = ["Hi there", "Hello", "Hi"]
 
-const intro: BotTurn = {
+// Booking turn, allowing users to start of with a booking by saying for example "I want to fly to Paris from Stockholm"
+// or to enter a slot-filling dialog if they simply reply "Yes".
+const askBooking: BotTurn = {
   say: ["Do you want to book a flight?", "How about booking a flight?"],
   user: [
-    {
-      intent: intents.travel,
-      bot: {
-        say: ["Excellent", "Sounds great"]
-      }
-    },
+    { intent: intents.travel, bot: ["Excellent", "Sounds great"] }, // This intent (defined in nlu.ts) does most of the magic here
     { intent: intents.Yes, bot: "Alright" },
     {
       intent: intents.No,
       bot: {
         say: "Okay, no problem! Come back if you change your mind!",
-        goto: EXIT
-      }
-    },
-    {
-      intent: ["What can I do", "what can you help with", "what can you do"],
-      bot: {
-        say: "I can help you book a flight",
-        repair: true
+        goto: EXIT // Exists the conversation
       }
     },
     {
@@ -38,8 +28,7 @@ const intro: BotTurn = {
   ]
 }
 
-export const ASK_TICKETS = "askTickets"
-
+// Slot filling turns follow, filling in the missing slots. See https://narratory.io/docs/slot-filling
 const askTickets: BotTurn = {
   label: ASK_TICKETS,
   cond: { tickets: null },
@@ -56,9 +45,11 @@ const askTo: BotTurn = {
 const askFrom: BotTurn = {
   cond: { fromCity: null },
   say: "Where do you wanna go from?",
-  user: [{ intent: intents.travelFrom, bot: `From ${user.fromCity}, got it` }]
+  user: [{ intent: intents.travelFrom, bot: `From _fromCity, got it` }]
 }
 
+// Confirmation turn, allowing the user to change any of the slots. Once happy, a booking is
+// made through the Google Assistant Transactions API
 const confirm: BotTurn = {
   say: "A flight from _fromCity to _toCity for _tickets people sounds lovely. Does that seem right?",
   user: [
@@ -93,6 +84,7 @@ const confirm: BotTurn = {
     {
       intent: ["It is ok", "OK", "great", "yes"],
       bot: {
+        // Booking state. See https://narratory.io/docs/transactions
         orderType: "BOOK",
         name: "A flight to _toCity",
         description: "_tickets tickets to _toCity from _fromCity",
@@ -102,6 +94,7 @@ const confirm: BotTurn = {
           set: {
             booked: true
           }
+          // // Here you would normally have a webhook calling your order API
           // url: "my_url",
           // params: ["toCity", "fromCity", "tickets"],
         },
@@ -120,30 +113,32 @@ const confirm: BotTurn = {
 }
 
 const anotherBooking: BotTurn = {
-  say: "Do you want to do another booking?",
+  say: ["Do you want to do another booking?", "Do you want to book another flight?"],
+  set: {
+    // Resetting all variables
+    toCity: null,
+    fromCity: null,
+    tickets: null
+  },
   user: [
+    {
+      intent: intents.travel,
+      bot: {
+        say: ["Excellent", "Sounds great"],
+        goto: ASK_TICKETS
+      }
+    },
     {
       intent: intents.Yes,
       bot: {
-        say: "okay. So where are you going next?",
-        set: {
-          toCity: null,
-          fromCity: null,
-          tickets: null,
-          booked: false
-        },
-        user: [
-          {
-            intent: intents.travel,
-            bot: {
-              say: ["Excellent", "Sounds great"],
-              goto: ASK_TICKETS
-            }
-          }
-        ]
+        say: "Alright",
+        goto: ASK_TICKETS
       }
     },
-    { intent: intents.No, bot: "Alright" }
+    {
+      intent: intents.No,
+      bot: "Okay, no problem!"
+    }
   ]
 }
 
@@ -154,4 +149,5 @@ const happyFlight: BotTurn = {
 
 const bye = ["Hope to see you again. Bye!"]
 
-export default [greeting, intro, askTickets, askTo, askFrom, confirm, anotherBooking, happyFlight, bye]
+// The main narrative, i.e the flow through the dialog is defined here
+export const narrative = [greeting, askBooking, askTickets, askTo, askFrom, confirm, anotherBooking, happyFlight, bye]

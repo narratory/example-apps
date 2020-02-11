@@ -1,5 +1,5 @@
-import narrative from "./narrative"
-import userInitiatives from "./userInitiatives"
+import { narrative } from "./narrative"
+import { userInitiatives } from "./userInitiatives"
 import { Agent, Language } from "narratory"
 
 const agent: Agent = {
