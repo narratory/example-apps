@@ -21,7 +21,7 @@ export const product : DynamicEntity = {
         { name: "egg" },
         { name: "couscous" }
     ],
-    url: "https://europe-west1-narratory-1.cloudfunctions.net/groceries",
+    url: "https://europe-west1-fruitseller-ptkgrc.cloudfunctions.net/specials",
     type: "AT_RUNTIME"
 }
 
@@ -96,6 +96,30 @@ export const queryProducts : Intent = {
     ]
 }
 
+export const queryStandardProducts : Intent = {
+    examples: [
+        "What regular products do you have",
+        "what do you have regularly",
+        "tell me what standard products you have",
+        "tell me what you normally have in stock",
+        "what standard products do you have",
+        "what do you always have",
+        "what is in the standard stock",
+        "what is always in stock"
+    ]
+}
+
+export const querySpecials : Intent = {
+    examples: [
+        "What specials do you have today",
+        "what are your specials today",
+        "what are today's specials",
+        "what is special today",
+        "what is today's extra products",
+        "what specials can I add"
+    ]
+}
+
 export const resetList : Intent = {
     examples: [
         "Reset the list",
@@ -103,8 +127,4 @@ export const resetList : Intent = {
         "empty the list",
         "empty it",
     ]
-}
-
-export const productsAsList = () => {
-    return product.enums.map(it => it.name + (it.alts && it.alts.length > 0 ? it.alts.join(", ") : "")).join(", ")
 }

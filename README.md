@@ -6,8 +6,8 @@ Example skills for the [Narratory tool](https://narratory.io/). Contributions we
 
 Skill         | Description                  | Live link | Concepts showcased                                   
 --------------|------------------------------|-----------|-------------------------------------------
-Flightbooker  | Allowing you to book flights | [flightbooker.examples.narratory.io](https://flightbooker.examples.narratory.io/) | [Slot-filling](https://narratory.io/docs/slot-filling) and [transactions](https://narratory.io/docs/transactions) | 
-Grocerylist  | Allowing you to create a grocery list | [grocerylist.examples.narratory.io](https://grocerylist.examples.narratory.io/) | [List entities](https://narratory.io/docs/nlu), [Custom variables](https://narratory.io/docs/logic#custom-variables), [Dynamic Botturns / API calls](https://narratory.io/docs/advanced-turns#dynamicbotturns---calling-apis-in-botturns), [Dynamic entities](https://narratory.io/docs/nlu#populating-entities-dynamically) | 
+Flightbooker  | Allowing you to book flights from city A to B using Google Assistants Transactions API | [flightbooker.examples.narratory.io](https://flightbooker.examples.narratory.io/) | [Slot-filling](https://narratory.io/docs/slot-filling) and [transactions](https://narratory.io/docs/transactions) | 
+Grocerylist  | Allowing you to create a grocery list. Comes with a backend that provides daily specials | [grocerylist.examples.narratory.io](https://grocerylist.examples.narratory.io/) | [List entities](https://narratory.io/docs/nlu), [Custom variables](https://narratory.io/docs/logic#custom-variables), [Dynamic Botturns / API calls](https://narratory.io/docs/advanced-turns#dynamicbotturns---calling-apis-in-botturns), [Dynamic entities](https://narratory.io/docs/nlu#populating-entities-dynamically) | 
 
 # Running apps
 1. Clone the repository, `git clone https://github.com/narratory/example-apps`.
