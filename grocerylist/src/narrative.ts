@@ -4,7 +4,8 @@ import * as intents from "./nlu"
 const greeting: BotTurn = {
   say: ["Welcome to the grocery store", "Welcome to the grocery shopper"],
   set: {
-    groceryList: null
+    groceryList: null,
+    products: intents.productsAsList()
   }
 }
 
@@ -48,7 +49,8 @@ const modifyList: BotTurn = {
     {
       intent: intents.addUnknownToList, // User didn't give us any product we have in stock
       bot: {
-        say: "We don't have that unfortunately. We have " + intents.productsAsList() + " in stock"
+        say: "We don't have that unfortunately. Wanna pick one of our regular items?",
+        repair: true
       }
     },
     {
@@ -63,8 +65,20 @@ const modifyList: BotTurn = {
     {
       intent: intents.queryProducts,
       bot: {
-        say: "The products in stock are " + intents.productsAsList() + ". Tickle your fancy?",
-        repair: true
+          url: "https://europe-west1-narratory-1.cloudfunctions.net/groceries",
+          set: {
+            asList: true,
+          },
+          params: ["asList"],
+          say: "Our regular products are _products",
+          bot: [{
+            cond: { todaysSpecials: true },
+            say: "And our specials for today are _todaysSpecials",
+            repair: true
+          }, {
+            say: "We don't have any specials today",
+            repair: true
+          }]
       }
     },
     {

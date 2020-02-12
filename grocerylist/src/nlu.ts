@@ -1,4 +1,4 @@
-import { Intent, Entity, entities } from "narratory"
+import { Intent, Entity, entities, DynamicEntity } from "narratory"
 
 export const Yes: Intent = {
     examples: ["yeah", "yes", "of course", "absolutely"]
@@ -12,7 +12,7 @@ export const NotSure: Intent = {
     examples: ["not sure", "I don't know", "no idea"]
 }
 
-export const product : Entity = {
+export const product : DynamicEntity = {
     name: "product",
     enums: [
         { name: "apple" },
@@ -20,7 +20,9 @@ export const product : Entity = {
         { name: "milk" },
         { name: "egg" },
         { name: "couscous" }
-    ]
+    ],
+    url: "https://europe-west1-narratory-1.cloudfunctions.net/groceries",
+    type: "AT_RUNTIME"
 }
 
 export const addProductsToList : Intent = {
