@@ -14,9 +14,7 @@ Grocerylist  | Allowing you to create a grocery list. Comes with a backend that 
 2. Go into the folder of the app you want to test, for example `cd flightbooker`.
 3. Run `npm install` to install dependencies.
 4. Set up credentials and fulfillment url (see [Narratory docs on setup](https://narratory.io/docs/setup))
-    * Add your Google credentials and Narratory key to the `src/agent.ts` file
-    * Add the Narratory fulfillment url to your Dialogflow agent
 5. Create your agent and start an interactive chat-prompt in the terminal with `npm run start`
 
 # Documentation
-For more info, see [the Narratory docs](https://narratory.io/docs/first-agent).
+For more info, see [the Narratory docs](https://narratory.io/).
