@@ -1,5 +1,5 @@
 import { BotTurn, ANYTHING, EXIT } from "narratory"
-import * as intents from "./nlu"
+import * as nlu from "./nlu"
 import { ASK_TICKETS } from "./util"
 
 const greeting = ["Hi there", "Hello", "Hi"]
@@ -33,19 +33,49 @@ const askTickets: BotTurn = {
   label: ASK_TICKETS,
   cond: { tickets: null },
   say: "How many people are travelling?",
-  user: [{ intent: intents.peopleTravelling, bot: "How nice, _tickets people." }]
+  user: [{ intent: nlu.peopleTravelling, bot: "How nice, _tickets people." }]
 }
 
 const askTo: BotTurn = {
   cond: { toCity: null },
   say: "Where do you wanna go to?",
-  user: [{ intent: intents.travelTo, bot: "To _toCity, got it" }]
+  user: [
+    {
+      intent: nlu.travelTo,
+      bot: {
+        say: "To _city, got it",
+        set: { toCity: "_toCity" }
+      }
+    },
+    {
+      intent: nlu.city,
+      bot: {
+        say: `_city, understood`,
+        set: { toCity: "_city" }
+      }
+    },
+  ]
 }
 
 const askFrom: BotTurn = {
   cond: { fromCity: null },
   say: "Where do you wanna go from?",
-  user: [{ intent: intents.travelFrom, bot: `From _fromCity, got it` }]
+  user: [
+    {
+      intent: nlu.travelFrom,
+      bot: {
+        say: `From _city, got it`,
+        set: { fromCity: "_city" }
+      }
+    },
+    {
+      intent: nlu.city,
+      bot: {
+        say: `_city, understood`,
+        set: { fromCity: "_city" }
+      }
+    },
+  ]
 }
 
 // Confirmation turn, allowing the user to change any of the slots. Once happy, a booking is
@@ -54,21 +84,23 @@ const confirm: BotTurn = {
   say: "A flight from _fromCity to _toCity for _tickets people sounds lovely. Does that seem right?",
   user: [
     {
-      intent: intents.travelFrom,
+      intent: nlu.travelFrom,
       bot: {
-        say: "Ok, sorry. _fromCity it is. Otherwise we are good?",
+        say: "Ok, sorry. _city it is. Otherwise we are good?",
+        set: { fromCity: "_city" },
         repair: true
       }
     },
     {
-      intent: intents.travelTo,
+      intent: nlu.travelTo,
       bot: {
-        say: "Ok, sorry. Going to _toCity. Otherwise we are good?",
+        say: "Ok, sorry. Going to _city. Otherwise we are good?",
+        set: { toCity: "_city" },
         repair: true
       }
     },
     {
-      intent: intents.peopleTravelling,
+      intent: nlu.peopleTravelling,
       bot: {
         say: "Alright. _tickets tickets. Does it sound good otherwise?",
         repair: true
@@ -122,21 +154,21 @@ const anotherBooking: BotTurn = {
   },
   user: [
     {
-      intent: intents.travel,
+      intent: nlu.travel,
       bot: {
         say: ["Excellent", "Sounds great"],
         goto: ASK_TICKETS
       }
     },
     {
-      intent: intents.Yes,
+      intent: nlu.Yes,
       bot: {
         say: "Alright",
         goto: ASK_TICKETS
       }
     },
     {
-      intent: intents.No,
+      intent: nlu.No,
       bot: "Okay, no problem!"
     }
   ]

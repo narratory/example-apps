@@ -45,16 +45,23 @@ export const peopleTravelling: Intent = {
 }
 
 export const travelFrom: Intent = {
-    examples: ["I want to go from _fromCity", "I want to fly from _fromCity", "_fromCity", "from _fromCity", "no from _fromCity", "no, going from _fromCity"],
+    examples: ["I want to go from _city", "I want to fly from _city", "from _city", "no from _city", "no, going from _city"],
     entities: {
-        fromCity: entities.geoCity,
+        city: entities.geoCity,
+    }
+}
+
+export const city: Intent = {
+    examples: ["_city"],
+    entities: {
+        city: entities.geoCity
     }
 }
 
 export const travelTo: Intent = {
-    examples: ["I want to go to _toCity", "I want to fly to _toCity", "_toCity", "to _toCity", "no to _toCity", "no, going to _toCity"],
+    examples: ["I want to go to _city", "I want to fly to _city", "_city", "to _city", "no to _city", "no, going to _city"],
     entities: {
-        toCity: entities.geoCity,
+        city: entities.geoCity,
     }
 }
 
@@ -75,4 +82,16 @@ export const costQuery: Intent = {
         country: entities.geoCountry,
         airport: entities.airport,
     }
+}
+
+export const weatherQuery: Intent = {
+    examples: [
+        "how is the weather there?",
+        "how is the weather in _weatherCity",
+        "what is the weather in _weatherCity"
+    ],
+    entities: {
+        weatherCity: entities.geoCity
+    }
+
 }
