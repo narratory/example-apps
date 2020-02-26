@@ -9,10 +9,10 @@ const greeting = ["Hi there", "Hello", "Hi"]
 const askBooking: BotTurn = {
   say: ["Do you want to book a flight?", "How about booking a flight?"],
   user: [
-    { intent: intents.travel, bot: ["Excellent", "Sounds great"] }, // This intent (defined in nlu.ts) does most of the magic here
-    { intent: intents.Yes, bot: "Alright" },
+    { intent: nlu.travel, bot: ["Excellent", "Sounds great"] }, // This intent (defined in nlu.ts) does most of the magic here
+    { intent: nlu.Yes, bot: "Alright" },
     {
-      intent: intents.No,
+      intent: nlu.No,
       bot: {
         say: "Okay, no problem! Come back if you change your mind!",
         goto: EXIT // Exists the conversation

@@ -43,10 +43,10 @@ const queryWeather: UserTurn = {
     say: [`The weather in _city is sunny right now`, `The weather in _city is rainy right now`]
   }, {
     cond: { toCity: true },
-    say: [`Your destination _toCity has remarkable weather, good choice!`]
+    say: "Your destination _toCity has remarkable weather, good choice!"
   }, {
     cond: { fromCity: true },
-    say: [`It's raining in _fromCity so it's probably a good idea to fly off`]
+    say: "It's raining in _fromCity so it's probably a good idea to fly off"
   }, {
     say: "Sorry, you need to be more specific as to where you mean"
   }
