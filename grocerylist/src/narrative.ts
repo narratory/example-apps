@@ -5,15 +5,8 @@ import * as intents from "./nlu"
 const greeting: BotTurn = {
   say: ["Welcome to the grocery store", "Welcome to the grocery shopper"],
   set: {
-    groceryList: null, // Set an empty list to begin with
-    initial: true, // Used for condition in the modifyList turn
-
-    /* Set a product variable containing all our standard products so that they can
-    be used in speech below. Note, we could have done this in the frontend just as well, but 
-    by letting the backend handle it for us we can use the & and | syntax to automatically add
-    the right conjunction.
-    */
-    standardProducts: intents.product.enums.map(it => it.name)
+    groceryList: [], // Set an empty list to begin with
+    initial: true // Used for condition in the modifyList turn
   }
 }
 
@@ -32,49 +25,58 @@ const modifyList: BotTurn = {
   },
   user: [
     {
-      intent: intents.addProductsToList, // User gave us atleast one product in stock
-      bot: {
-        say: [
-          {
-            cond: { unknown: null }, // User only gave us products we have in stock
-            text: [
-              "Absolutely. _product.",
-              "Okay, adding _product to the list.",
-              "Great, _product. List is now _groceryList."
-            ]
-          },
-          {
-            // User also gave us some unknown input, likely a product not in stock
-            text: [
-              "Ok. _product made the list but I don't have _unknown unfortunately",
-              "Added _product but couldn't add _unknown since we don't have it"
-            ]
+      intent: intents.addProductsToList,
+      bot: [
+        {
+          cond: { product: true }, // If our product slot is set
+          say: [
+            "Absolutely. _product.",
+            "Okay, adding _product to the list.",
+            "Great, _product. List is now _groceryList."
+          ],
+          set: {
+            groceryList: "+_product"
           }
-        ],
-        set: {
-          groceryList: "+_product"
+        },
+        {
+          say: ["Sorry. I don't have that", "Unfortunately, I don't have that"]
         }
-      }
-    },
-    {
-      intent: intents.addUnknownToList, // User didn't give us any product we have in stock
-      bot: {
-        say: "We don't have that unfortunately. Wanna pick one of our regular items?"
-      }
+      ]
     },
     {
       intent: intents.removeProductsFromList,
-      bot: {
-        say: "Okay, removing _product. List is now _groceryList.",
-        set: {
-          groceryList: "-_product"
+      bot: [
+        {
+          cond: {
+            groceryList: "_product", // If GroceryList contains our products
+            AND: {
+              // A trick since we can't have the same parameter twise and we want to check both
+              // if the groceryList parameter is isn't empty and not the same as _product
+              groceryList: true
+            }
+          },
+          say: [
+            {
+              cond: { groceryList: true },
+              text: "Okay, removing _product. List is now _groceryList."
+            },
+            "Okay, removing _product. List is now empty"
+          ],
+          set: {
+            groceryList: "-_product"
+          }
+        },
+        {
+          say: "I can't do that, you don't have _product on the list."
         }
-      }
+      ]
     },
     {
       intent: intents.queryProducts,
-      bot: {
-        /*
+      bot: "We have most products you'd expect a grocery store to have. And our daily specials"
+    },
+    {
+      /*
           First we query our API for today's specials, then we forge an answer 
           using this BridgeTurn, i.e a BotTurn with a subsequent BotTurn based
           on the condition that we receive todaysSpecials from the backend. 
@@ -82,27 +84,9 @@ const modifyList: BotTurn = {
           We set a variable asList to be able to pass it to the backend. The reason 
           is that we use the same endpoint to both set the variable todaysSpecials
           so that we can use it in the output here, but also in the DynamicEntity 
-          (see nlu.ts) to provide us with the proper Enums neeeded to add
+          (see nlu.ts) to provide us with the proper Enums needed to add
           the specials to our language model.
         */
-        set: {
-          asList: true
-        },
-        url: "https://europe-west1-fruitseller-ptkgrc.cloudfunctions.net/specials",
-        params: ["asList"],
-        say: "Our regular products are _standardProducts", // We put a say in the BridgeTurn to avoid repeating it for the conditioned turns next
-        bot: [
-          {
-            cond: { todaysSpecials: true },
-            say: "And our specials for today are _todaysSpecials"
-          },
-          {
-            say: "We don't have any specials today"
-          }
-        ]
-      }
-    },
-    {
       intent: intents.querySpecials,
       bot: {
         url: "https://europe-west1-fruitseller-ptkgrc.cloudfunctions.net/specials",
@@ -120,10 +104,6 @@ const modifyList: BotTurn = {
           }
         ]
       }
-    },
-    {
-      intent: intents.queryStandardProducts,
-      bot: "Our regular products are _standardProducts"
     },
     {
       intent: intents.queryList,
@@ -173,11 +153,24 @@ const modifyList: BotTurn = {
 
 const continueModifying: BotTurn = {
   say: [
-    "Now, do you want to add anything more to your list?",
-    "Want to add something?",
-    "Missing anything on the list?",
-    "Should I add anything else?",
-    "Do you want to add anything else?"
+    {
+      cond: { groceryList: null }, // If list is empty
+      text: [
+        "Do you want to add something to the list?",
+        "What should I add to your list?",
+        "What should we add?",
+        "Want to add something?"
+      ]
+    },
+    {
+      // If we have items on the list
+      text: [
+        "Now, do you want to add anything more to your list?",
+        "Missing anything on the list?",
+        "Should I add anything else?",
+        "Do you want to add anything else?"
+      ]
+    }
   ],
   set: {
     initial: false
