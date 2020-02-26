@@ -10,14 +10,20 @@ export const No: Intent = {
 
 export const travel: Intent = {
     examples: [
-        "book a flight",
-        "book tickets to _toCity",
+        "I want to book a flight",
+        "I want to book tickets",
         "_toCity",
         "to _toCity",
         "to _toCity from _fromCity",
+        "to _toCity from _fromCity for _tickets",
+        "book a flight",
+        "book tickets to _toCity",
+        "book _tickets tickets to _toCity",
+        "book tickets to _toCity from _fromCity",
+        "book _tickets tickets to _toCity from _fromCity",
         "going to _toCity from _fromCity",
-        "I want to book a flight",
-        "I want to book tickets",
+        "going from _fromCity to _toCity",
+        "_tickets people going from _fromCity to _toCity",
         "I want to book _tickets tickets to _toCity",
         "I want to book _tickets tickets from _fromCity to _toCity",
         "I want to fly from _fromCity to _toCity for _tickets people",
@@ -28,7 +34,10 @@ export const travel: Intent = {
         "I want to fly from _fromCity",
         "I wanna fly to _toCity",
         "I wanna fly from _fromCity to _toCity",
-        "I wanna fly to _toCity from _fromCity"
+        "I wanna fly to _toCity from _fromCity",
+        "fly to _toCity from _fromCity",
+        "fly from _fromCity to _toCity",
+        "I wanna go to _toCity",
     ],
     entities: {
         tickets: entities.numberInteger,
