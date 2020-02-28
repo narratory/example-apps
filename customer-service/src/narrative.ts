@@ -1,4 +1,4 @@
-import { BotTurn, ANYTHING, EXIT } from "narratory"
+import { BotTurn, ANYTHING, EXIT, BridgeTurn } from "narratory"
 import * as nlu from "./nlu"
 import { endSession } from "./partials"
 import { orderNarrative } from "./order/queryOrder"
@@ -8,11 +8,12 @@ import { paymentNarrative } from "./payment/queryPayment"
     Narrative, i.e the bot-driven interaction
 */
 
-const greeting: BotTurn = {
-  say: ["Hi there", "Greetings", "hello"],
+const greeting: BridgeTurn = {
+  say: ["Hi there", "Greetings", "Hello"],
   set: {
     initial: true
-  }
+  },
+  bot: ["Welcome to the one-size-fits-noone T-shirt store customer service"]
 }
 
 const offerHelp: BotTurn = {
@@ -33,18 +34,14 @@ const offerHelp: BotTurn = {
             problem: "order"
           },
           say: "Alright",
-          goto: "QUERY_ORDER"
+          goto: "QUERY_ORDER" // Go to the order support flow in /order folder
         },
         {
           cond: {
             problem: "payment"
           },
           say: "Okay",
-          goto: "QUERY_PAYMENT"
-        },
-        {
-          say: "Cond didn't work here...",
-          repair: true
+          goto: "QUERY_PAYMENT" // Go to the payment support flow in /payment folder
         }
       ]
     },

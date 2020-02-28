@@ -13,6 +13,7 @@ export const notDelivered : Intent = {
 
 export const wrongQuantity : Intent = {
     examples: [
+        "wrong quantity",
         "I ordered the wrong amount",
         "I ordered the wrong quantity",
         "I ordered too many",
