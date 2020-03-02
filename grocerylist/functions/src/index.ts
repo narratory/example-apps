@@ -21,28 +21,25 @@ const scrambleTodaysSpecials = () => {
 }
 
 // The cloud function, defined here using a Narratory-cloud helper-method
-export const specials = cloudFunction({
-  innerFkn: async (req, res) => {
-    
-    scrambleTodaysSpecials()
+export const specials = cloudFunction(async (req, res) => {
+  scrambleTodaysSpecials()
 
-    if (req.body.asList) {
-      // Here, we set a variable to be used in speech by the bot (in narrative.ts)
-      res.send({
-        set: {
-          todaysSpecials: cachedGroceries.map(arr => arr[0]) // Return the first synonym of each item only
+  if (req.body.asList) {
+    // Here, we set a variable to be used in speech by the bot (in narrative.ts)
+    res.send({
+      set: {
+        todaysSpecials: cachedGroceries.map(arr => arr[0]) // Return the first synonym of each item only
+      }
+    })
+  } else {
+    // Here, we return Enums for our dynamic entity (in nlu.ts)
+    res.send(
+      cachedGroceries.map(item => {
+        return {
+          name: item[0], // First synonym becomes our name (main identifier, used in speech)
+          alts: item.slice(1) // Any other synonyms are used only for NLU in this app
         }
       })
-    } else {
-      // Here, we return Enums for our dynamic entity (in nlu.ts)
-      res.send(
-        cachedGroceries.map(item => {
-          return {
-            name: item[0], // First synonym becomes our name (main identifier, used in speech)
-            alts: item.slice(1) // Any other synonyms are used only for NLU in this app
-          }
-        })
-      )
-    }
+    )
   }
-})
+}, { memory: "1GB" })

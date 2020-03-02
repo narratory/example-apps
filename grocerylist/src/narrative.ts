@@ -1,5 +1,6 @@
 import { BotTurn } from "narratory"
 import * as intents from "./nlu"
+import { confirmRemovingProduct } from "./partials"
 
 // Our greeting state, and setting up some initial variables
 const greeting: BotTurn = {
@@ -48,26 +49,22 @@ const modifyList: BotTurn = {
       bot: [
         {
           cond: {
+            product: true, // If our product slot is filled
             groceryList: "_product", // If GroceryList contains our products
-            AND: {
-              // A trick since we can't have the same parameter twise and we want to check both
-              // if the groceryList parameter is isn't empty and not the same as _product
-              groceryList: true
-            }
           },
-          say: [
-            {
-              cond: { groceryList: true },
-              text: "Okay, removing _product. List is now _groceryList."
-            },
-            "Okay, removing _product. List is now empty"
-          ],
+          say: confirmRemovingProduct, // A conditional say, moved to partials.ts for readability here
           set: {
             groceryList: "-_product"
           }
         },
         {
+          cond: {
+            product: true // If our product slot is filled but we don't have it in our list
+          },
           say: "I can't do that, you don't have _product on the list."
+        },
+        {
+          say: "That is not a product I have, or I failed to understand you. Try again!"
         }
       ]
     },
@@ -180,7 +177,7 @@ const continueModifying: BotTurn = {
 
 const summary: BotTurn = {
   label: "SUMMARY",
-  say: ["The final list is _groceryList", "Now, your list is _groceryList"]
+  say: ["The final list is _groceryList", "Now, your final list contains _groceryList"]
 }
 
 const goodbye = "Thank you and goodbye for now!"

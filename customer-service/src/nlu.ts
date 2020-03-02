@@ -32,7 +32,9 @@ export const queryProblem : Intent = {
     "my _problem has issues",
     "I have issues with my _problem",
     "issues with my _problem",
+    "issue with my _problem",
     "with my _problem",
     "_problem",
+    "problem with my _problem"
   ]
 }
