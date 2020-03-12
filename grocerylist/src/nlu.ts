@@ -16,7 +16,7 @@ export const product: DynamicEntity = {
   name: "product",
   enums: require("./groceries.json"), // Our hardcoded list of groceries. Source: http://usefulenglish.ru/vocabulary/food-main-list
   url: "https://europe-west1-fruitseller-ptkgrc.cloudfunctions.net/specials", // Our dynamic list, fetched from this URL
-  type: "AT_RUNTIME" // We fetch the specials on runtime (as opposed to agent create time)
+  type: "SESSION" // We fetch the specials on every SESSION
 }
 
 export const addProductsToList: Intent = {
