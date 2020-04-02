@@ -54,6 +54,12 @@ const askTo: BotTurn = {
         set: { toCity: "_city" }
       }
     },
+    {
+      intent: ANYTHING,
+      bot: {
+        say: "Seems to be unavailable to get tickets to, sorry.",
+        repair: true }
+    },
   ]
 }
 
@@ -75,6 +81,12 @@ const askFrom: BotTurn = {
         set: { fromCity: "_city" }
       }
     },
+    {
+      intent: ANYTHING,
+      bot: {
+        say: "Seems to be unavailable to get tickets from, sorry.",
+        repair: true }
+    }
   ]
 }
 
@@ -107,14 +119,14 @@ const confirm: BotTurn = {
       }
     },
     {
-      intent: ["No", "It is not good", "wrong"],
+      intent: ["No", "It is not good", "wrong", "mistake", "error", "fault", "mistype", "alarm"],
       bot: {
         say: "Okay. What do you want to correct?",
         repair: true
       }
     },
     {
-      intent: ["It is ok", "OK", "great", "yes"],
+      intent: ["It is ok", "OK", "Ok", "ok", "great", "alright", "right", "correct", "fine", "yes", "yep", "yeh", "yeap", "yeah"],
       bot: {
         // Booking state. See https://narratory.io/docs/transactions
         orderType: "BOOK",
@@ -136,7 +148,7 @@ const confirm: BotTurn = {
       }
     },
     {
-      intent: ["Abort"],
+      intent: ["Abort", "Exit", "End", "Finish"],
       bot: {
         say: "Okay, aborting"
       }
