@@ -9,7 +9,8 @@ export const notDelivered : Intent = {
         "I haven't received my products",
         "where is my tshirt",
         "I didnt get my order",
-        "I haven't got my package"
+        "I haven't got my package",
+        "where is it"
     ]
 }
 

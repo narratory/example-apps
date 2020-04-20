@@ -1,36 +1,17 @@
 {
-  "name": "narratory-flight-booker",
+  "name": "narratory-grocery-list",
   "version": "0.2.1",
-  "description": "A flight-booking example app for Narratory. Check out narratory.io for more examples and docs.",
+  "description": "A Grocery list example app for Narratory. Check out narratory.io for more examples and docs.",
   "config": {
     "agent": "agent.ts"
-  },
-  "scripts": {
-    "start": "tsc && node node_modules/narratory/out/cmd/start.js",
-    "build": "tsc && node node_modules/narratory/out/cmd/build.js",
-    "chat": "node node_modules/narratory/out/cmd/chat.js",
-    "watch": "tsc --watch"
-  },
-  "watch": {
-    "updateEntities": {
-      "patterns": [
-        "src"
-      ],
-      "ignore": "src/user.ts",
-      "quiet": true,
-      "extensions": "ts"
-    }
   },
   "author": "luddilo",
   "license": "ISC",
   "dependencies": {
     "@types/node": "^12.12.21",
-    "narratory": "^0.8.0",
-    "narratory-cloud": "^0.1.0",
-    "npm-watch": "^0.6.0"
+    "narratory": "^0.12.7"
   },
   "devDependencies": {
-    "concurrently": "^5.0.2",
     "typescript": "^3.7.4"
   }
 }

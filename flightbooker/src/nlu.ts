@@ -1,7 +1,7 @@
 import { Intent, entities } from "narratory"
 
 export const Yes: Intent = {
-    examples: ["yeah", "yes", "of course", "absolutely"]
+    examples: ["yeah", "yes", "of course", "absolutely", "yep"]
 }
 
 export const No: Intent = {

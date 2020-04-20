@@ -12,7 +12,8 @@ const agent: Agent = {
   bridges: ["So", "Where were we", "Now"],
   narratoryKey: narratoryOptions.narratoryKey, // Populate this file with your Narratory key. Sign up att narratory.io if you don't have one!
   googleCredentials: require("../google_credentials.json"), // Populate this file, or change the link to your existing credentials file. Check the README.md for how to create it.
-  fallbackWebhook: narratoryOptions.fallbackWebhook
+  logWebhook: narratoryOptions.fallbackWebhook,
+  logLevel: "FALLBACKS",
 }
 
 export default agent

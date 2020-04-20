@@ -8,22 +8,22 @@ import { paymentNarrative } from "./payment/queryPayment"
     Narrative, i.e the bot-driven interaction
 */
 
-const greeting: BridgeTurn = {
-  say: ["Hi there", "Greetings", "Hello"],
-  set: {
-    initial: true
-  },
-  bot: ["Welcome to the one-size-fits-noone T-shirt store customer service"]
 }
+
+const greeting = ["Hi there", "Greetings", "Hello"]
+
+const welcome = "Welcome to the one-size-fits-noone T-shirt store customer service"
 
 const offerHelp: BotTurn = {
   label: "OFFER_HELP",
   say: [
     {
-      cond: { initial: true },
+      cond: { helped: false },
       text: "What can I help you with?"
     },
-    "Can I help with anything else?"
+    {
+      text: "Can I help with anything else?"
+    }
   ],
   user: [
     {
@@ -83,4 +83,4 @@ const goodbye: BotTurn = {
   say: ["Thanks for today. Goodbye!", "Thanks, goodbye!"]
 }
 
-export default [greeting, offerHelp, ...orderNarrative, ...paymentNarrative, goodbye]
+export default [greeting, welcome, offerHelp, ...orderNarrative, ...paymentNarrative, goodbye]

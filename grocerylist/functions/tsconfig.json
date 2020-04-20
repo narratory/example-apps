@@ -1,15 +1,16 @@
 {
   "compilerOptions": {
-    "module": "commonjs",
-    "noImplicitReturns": true,
-    "noUnusedLocals": true,
-    "outDir": "lib",
-    "sourceMap": true,
-    "strict": true,
-    "target": "es2017"
+    "outDir": "out",
+    "rootDir": "./",
+    "target": "es5",
+    "lib": [
+      "es2019"
+    ],
+    "resolveJsonModule": true,
   },
-  "compileOnSave": true,
   "include": [
-    "src"
+    "src/**/*",
+    "src/**/**/*.json",
+    "./*.json"
   ]
 }

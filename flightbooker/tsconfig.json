@@ -1,6 +1,7 @@
 {
     "compilerOptions": {
       "outDir": "out",
+      "rootDir": "./",
       "target": "es5",
       "lib": [
         "es2019"
@@ -9,6 +10,7 @@
     },
     "include": [
       "src/**/*",
-      "src/**/**/*.json"
+      "src/**/**/*.json",
+      "./*.json"
     ]
   }

@@ -1,14 +1,16 @@
-{
-    "compilerOptions": {
-      "outDir": "out",
-      "target": "es5",
-      "lib": [
-        "es2019"
-      ],
-      "resolveJsonModule": true,
-    },
-    "include": [
-      "src/**/*",
-      "src/**/**/*.json"
-    ]
-  }
+        {
+          "compilerOptions": {
+            "outDir": "out",
+            "rootDir": "./",
+            "target": "es5",
+            "lib": [
+              "es2019"
+            ],
+            "resolveJsonModule": true,
+          },
+          "include": [
+            "src/**/*",
+            "src/**/**/*.json",
+            "./*.json"
+          ]
+        }

@@ -11,7 +11,7 @@ export const beyondDemo: BotTurn = {
     "Thanks! Now, I would of course try to help you but it goes beyond the scope OF this demo!"
   ],
   set: {
-      initial: false
+    helped: true
   },
   goto: "OFFER_HELP"
 }
