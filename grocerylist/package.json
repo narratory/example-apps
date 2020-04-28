@@ -9,7 +9,7 @@
   "license": "ISC",
   "dependencies": {
     "@types/node": "^12.12.21",
-    "narratory": "^0.12.7"
+    "narratory": "^0.13.0"
   },
   "devDependencies": {
     "typescript": "^3.7.4"

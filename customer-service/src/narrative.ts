@@ -8,8 +8,6 @@ import { paymentNarrative } from "./payment/queryPayment"
     Narrative, i.e the bot-driven interaction
 */
 
-}
-
 const greeting = ["Hi there", "Greetings", "Hello"]
 
 const welcome = "Welcome to the one-size-fits-noone T-shirt store customer service"

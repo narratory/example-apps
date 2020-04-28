@@ -1,5 +1,10 @@
 import { UserTurn, EXIT } from "narratory"
 
+const buyGroceries : UserTurn = {
+    intent: ["I want to buy groceries", "I want to add groceries to my list", "talk to grocery list"],
+    bot: "Grocery list at your service!"
+}
+
 const exitIntent: UserTurn = {
     intent: ["exit", "stop"],
     bot: {
@@ -8,4 +13,4 @@ const exitIntent: UserTurn = {
     }
 }
 
-export default [exitIntent]
+export default [buyGroceries, exitIntent]

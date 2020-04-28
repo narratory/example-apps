@@ -44,7 +44,7 @@ const askTo: BotTurn = {
       intent: nlu.travelTo,
       bot: {
         say: "To _city, got it",
-        set: { toCity: "_toCity" }
+        set: { toCity: "_city" }
       }
     },
     {
