@@ -1,0 +1,23 @@
+{
+  "name": "corona-guiden",
+  "version": "0.0.1",
+  "description": "A start-kit to start building chat and voice interactions using the Narratory service",
+  "config": {
+    "agent": "agent.ts"
+  },
+  "scripts": {
+    "watch": "tsc --watch",
+    "generate:faq": "tsc && node out/src/generate.js"
+  },
+  "author": "luddilo",
+  "license": "ISC",
+  "dependencies": {
+    "@types/node": "^12.12.21",
+    "google-spreadsheet": "^3.0.11",
+    "narratory": "^0.13.7"
+  },
+  "devDependencies": {
+    "typescript": "^3.7.4"
+  },
+  "private": true
+}
