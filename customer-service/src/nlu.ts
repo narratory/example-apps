@@ -38,3 +38,20 @@ export const queryProblem : Intent = {
     "problem with my _problem"
   ]
 }
+
+export const queryHumanHandover : Intent = {
+  examples: [
+    "I wanna talk to a human",
+    "I need to talk to a human",
+    "stop",
+    "I'm stuck",
+    "help",
+    "this isn't working",
+    "let me talk to a live person",
+    "let me talk to a representative",
+    "I wanna talk to a person",
+    "speak with real person",
+    "talk to operator",
+    "give me a person"
+  ]
+}

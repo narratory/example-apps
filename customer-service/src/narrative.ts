@@ -40,6 +40,10 @@ const offerHelp: BotTurn = {
           },
           say: "Okay",
           goto: "QUERY_PAYMENT" // Go to the payment support flow in /payment folder
+        },
+        {
+          say: "Sorry, was that a problem with your payment or your order?",
+          repair: true
         }
       ]
     },
