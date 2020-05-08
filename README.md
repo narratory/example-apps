@@ -8,8 +8,8 @@ App      | Description  <img width="50%"/>  | Live link
 --------------|----------------|-----------|-------------------------------------------
 Flightbooker  | A [Slot-filling](https://narratory.io/docs/slot-filling) interaction allowing you to book flights from city A to B using Google Assistants [Transactions](https://narratory.io/docs/transactions) API | [Live demo](https://flightbooker.examples.narratory.io/)
 Grocery List  | Allowing you to create a grocery list using [List entities](https://narratory.io/docs/nlu). Comes with a backend using [API calls](https://narratory.io/docs/advanced-turns#dynamicbotturns---calling-apis-in-botturns) that provides daily specials ([Dynamic entities](https://narratory.io/docs/nlu#populating-entities-dynamically))| [Live demo](https://grocerylist.examples.narratory.io/)
-Customer Service  | Helping users in a fictional one-size-fits-noone T-shirt e-commerce store with various problems related to payments and orders. The live demo uses a real-time translation and a human handover feature (the code for this is not yet in this repo) | [Live demo](http://demos.narratory.io/) | Multiple domains and branching between them, human handover
-Corona guiden FAQ | Answering questions about the Corona crisis backed by a Google Sheets CMS | [Tutorial](https://narratory.io/docs/tutorial-faq-google-sheets) | FAQ, Google Sheets as CMS
+Customer Service  | Helping users in a fictional one-size-fits-noone T-shirt e-commerce store with various problems related to payments and orders. The live demo uses a real-time translation and a human handover feature (the code for this is not yet in this repo) | [Live demo](http://demos.narratory.io/)
+Corona guiden FAQ | Answering questions about the Corona crisis backed by a Google Sheets CMS | [Tutorial](https://narratory.io/docs/tutorial-faq-google-sheets)
 
 # Running apps
 0. Install Narratory with `npm install -g narratory`
