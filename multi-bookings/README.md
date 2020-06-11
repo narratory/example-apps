@@ -8,6 +8,7 @@ A multi-booking bot allowing you to book flights, car and hotel room in the same
 
 ### Example script
 
+```text
 Bot: What can I do for you?
 >> I want to book a flight to paris from berlin
 Bot: Great
@@ -24,3 +25,4 @@ Bot: What can I do for you?
 Bot: Great
 Bot: A car in Paris at 3rd june sounds great
 Bot: What can I do for you?
+```
