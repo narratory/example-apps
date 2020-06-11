@@ -6,6 +6,84 @@ A multi-booking bot allowing you to book flights, car and hotel room in the same
 
 > **Note** very limited training phrases / examples for now so stick to the script below
 
+### How does it work?
+
+It has a single BotTurn that loops "what can I do for you"/"what else can I do for you" in `src/narrative.ts`:
+
+```typescript
+export const start: BotTurn = {
+  label: "start",
+  say: [
+    { cond: { turnCount: 0 }, text: "What can I do for you?" },
+    { text: "What else can I do for you?" }
+  ],
+  user: [
+    {
+      intent: nlu.bookFlight,
+      bot: {
+        say: "Great",
+        goto: "fulfillFlight"
+      }
+    },
+    {
+      intent: nlu.bookCar,
+      bot: {
+        say: "Great",
+        goto: "fulfillCar"
+      }
+    },
+    {
+      intent: nlu.bookHotel,
+      bot: {
+        say: "Great",
+        goto: "fulfillHotel"
+      }
+    },
+    {
+      intent: nlu.nothing,
+      bot: "Okay, have a great day!"
+    }
+  ]
+}
+```
+
+Each fulfillment is then using the same variable names for the (destination) city and date allowing scripts like the below. One example of the car booking fulfillment: 
+
+```typescript
+export const fulfillCarBooking: BotTurn[] = [
+    {
+      label: "fulfillCar",
+      cond: {
+        toCity: false
+      },
+      say: "In which city?", // Asking for city if we haven't previously set one (checked by the condition above - i.e that toCity is set)  
+      user: [
+        {
+          intent: nlu.city,
+          bot: {
+            say: "Alright, car at _date_original in _toCity",
+            set: {
+              toCity: "_city"
+            }
+          }
+        }
+      ]
+    },
+    {
+      cond: {
+        date: false
+      },
+      say: "At what date?", // Asking for date if it hasn't previously been set - i.e date is not set
+      user: [{ intent: nlu.date, bot: "Alright, car at _date_original in _toCity" }]
+    },
+    {
+      say: "A car in _toCity at _date_original sounds great", // Confirming the booking
+      goto: "start" // And finally returning to the start
+    }
+  ]
+
+```
+
 ### Example script
 
 First booking a flight and then adding a car and hotel room: 
