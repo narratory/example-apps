@@ -8,10 +8,12 @@ A multi-booking bot allowing you to book flights, car and hotel room in the same
 
 ### How does it work?
 
+The bot uses Dialogflow's built-in entities for City and Date and Narratory's session variables to save set data throughout the session. 
+
 It has a single BotTurn that loops "what can I do for you"/"what else can I do for you" in `src/narrative.ts`:
 
 ```typescript
-export const start: BotTurn = {
+const start: BotTurn = {
   label: "start",
   say: [
     { cond: { turnCount: 0 }, text: "What can I do for you?" },
@@ -50,7 +52,7 @@ export const start: BotTurn = {
 Each fulfillment is then using the same variable names for the (destination) city and date allowing scripts like the below. One example of the car booking fulfillment: 
 
 ```typescript
-export const fulfillCarBooking: BotTurn[] = [
+const fulfillCarBooking: BotTurn[] = [
     {
       label: "fulfillCar",
       cond: {
@@ -84,7 +86,25 @@ export const fulfillCarBooking: BotTurn[] = [
 
 ```
 
-### Example script
+To disallow the variables to be reset if slots aren't filled in subsequent requests, i.e if the user first states: "I want to book a hotel in New York on Jan 3rd" which fills both the **city** and the **date** slot and then "I want to book a car in Brooklyn" which only fills the **city** slot (Dialogflow would here still pass an empty string as the unfilled **date** slot), the parameter `noEntityReset` is set on all intents (**bookCar** showed below).
+
+```typescript
+const bookCar: Intent = {
+  entities: {
+    toCity: entities.geoCity,
+    date: entities.date,
+  },
+  examples: [
+    "I want to book a car in _toCity at _date",
+    "I want to book a car in _toCity",
+    "I want to book a car at _date",
+    "i want to book a car",
+  ],
+  noEntityReset: true, /* This parameter makes sure that a previously set "date" variable will not be reset if this intent is triggered without filling this slot */
+}
+```
+
+### Example scripts
 
 First booking a flight and then adding a car and hotel room: 
 
