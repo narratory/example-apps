@@ -8,6 +8,8 @@ A multi-booking bot allowing you to book flights, car and hotel room in the same
 
 ### Example script
 
+First booking a flight and then adding a car and hotel room: 
+
 ```text
 Bot: What can I do for you?
 >> I want to book a flight to paris from berlin
@@ -24,5 +26,42 @@ Bot: What can I do for you?
 >> I want to book a car
 Bot: Great
 Bot: A car in Paris at 3rd june sounds great
+Bot: What can I do for you?
+```
+
+First booking a car and then a hotel room: 
+
+```text
+Bot: What can I do for you?
+>> I want to book a car in paris
+Bot: Great
+Bot: At what date?
+>> 5th july
+Bot: Alright, car at 5th july in Paris
+Bot: A car in Paris at 5th july sounds great
+Bot: What can I do for you?
+>> I want to book a hotel
+Bot: Great
+Bot: Okay, great. A room in Paris at 5th july is now booked!
+Bot: What can I do for you?
+```
+
+First booking a hotel and then a flight:
+
+```text
+Bot: What can I do for you?
+>> I want to book a hotel in paris
+Bot: Great
+Bot: At what date?
+>> 3rd may
+Bot: Alright, on the 3rd may
+Bot: Okay, great. A room in Paris at 3rd may is now booked!
+Bot: What can I do for you?
+>> I want to book a flight
+Bot: Great
+Bot: From which city?
+>> berlin
+Bot: Alright, flying from Berlin
+Bot: Okay, great. A flight from Berlin to Paris at 3rd may is now booked!
 Bot: What can I do for you?
 ```
