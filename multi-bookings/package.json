@@ -1,0 +1,21 @@
+{
+  "name": "multi-bookings",
+  "version": "0.0.0",
+  "description": "A start-kit to start building chat and voice interactions using the Narratory service",
+  "config": {
+    "agent": "agent.ts"
+  },
+  "scripts": {
+    "watch": "tsc --watch"
+  },
+  "author": "luddilo",
+  "license": "ISC",
+  "dependencies": {
+    "@types/node": "^12.12.21",
+    "narratory": "^0.13.7"
+  },
+  "devDependencies": {
+    "typescript": "^3.7.4"
+  },
+  "private": true
+}
