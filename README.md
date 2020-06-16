@@ -13,12 +13,12 @@ Corona guiden FAQ | Answering questions about the Corona crisis backed by a Goog
 Multi-booker | A [Slot-filling](https://narratory.io/docs/slot-filling) interaction for flight, car and hotel bookings assuming the car and hotel bookings will be in the destination city, thus reusing the data. | N/A
 
 # Running apps
-0. Install Narratory with `npm install -g narratory`
-1. Clone the repository, `git clone https://github.com/narratory/example-apps`.
-2. Go into the folder of the app you want to test, for example `cd flightbooker`.
-3. Run `npm install` to install dependencies.
-4. Set up credentials (see [Narratory docs on setup](https://narratory.io/docs/setup))
-5. Create your agent and start an interactive chat-prompt in the terminal with `narratory start`
+1. Install Narratory with `npm install -g narratory`
+2. Clone the repository, `git clone https://github.com/narratory/example-apps`.
+3. Go into the folder of the app you want to test, for example `cd flightbooker`.
+4. Run `npm install` to install dependencies.
+5. Set up credentials (see [Narratory docs on setup](https://narratory.io/docs/setup))
+6. Create your agent and start an interactive chat-prompt in the terminal with `narratory start`
 
 # Documentation
 For more info, see [the Narratory docs](https://narratory.io/).
