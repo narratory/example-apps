@@ -8,9 +8,9 @@ import { paymentNarrative } from "./payment/queryPayment"
     Narrative, i.e the bot-driven interaction
 */
 
-const greeting = ["Hi there", "Greetings", "Hello"]
+const greeting = ["Hi there!", "Greetings!", "Hello!"]
 
-const welcome = "Welcome to the one-size-fits-noone T-shirt store customer service"
+const welcome = "Welcome to the one-size-fits-noone T-shirt store customer service."
 
 const offerHelp: BotTurn = {
   label: "OFFER_HELP",
@@ -44,45 +44,72 @@ const offerHelp: BotTurn = {
         {
           say: "Sorry, was that a problem with your payment or your order?",
           repair: true
-        }
+        },
       ]
     },
     {
       intent: nlu.Yes,
       bot: {
-        say: "Is that problems with your order, or maybe with your payment?",
+        say: "Is there a problem with your order, or maybe with your payment?",
         repair: true
       }
     },
     {
       intent: nlu.No,
       bot: {
-        say: "Okay",
+        say: "Okay.",
         goto: "END"
       }
     },
+    {
+    intent: ["product"],
+    bot: {
+      say: "I will be able to help out with products soon. For now, I can only help you with problems regarding your order or your payment.",
+      bot: {
+        say: "Can I help you with something else?",
+        repair: true,
+      }
+    },
+},
     {
       intent: ANYTHING,
       bot: [
         {
           cond: { turnCount: 0 },
-          say: "For now, I can only help with questions about orders or payments",
+          say: "Sorry, I didn't get that. Please let me know if you need help with either an order or a payment.",
           repair: true
         },
         {
           cond: { turnCount: 1 },
-          say: "Try saying that you have a problem with your order or your payment",
+          say: "Try to state whether your problem is regarding your order or your payment.",
           repair: true
         },
         endSession
       ]
+    },
+    {
+      intent: nlu.queryHumanHandover,
+      bot:  
+      { say: "Ah, you want to talk to a human! I will be able to connect you with one as soon as my developers teach me how.",
+      bot: {
+        say: "Do you need help you with your order or your payment? I can help you with that.",
+        repair: true,
+      }
+    }
+    },
+    {
+      intent: ["I don't know", "idk", "you tell me", "About that I can ask", "What can I ask", " I can ask about number of requested", "dunno"],
+      bot: {
+        say: "I can help you with either your order or your payment.",
+        repair: true,
+      }
     }
   ]
 }
 
 const goodbye: BotTurn = {
   label: "END",
-  say: ["Thanks for today. Goodbye!", "Thanks, goodbye!"]
+  say: ["Thank you for today. Goodbye!", "Thanks, goodbye!"]
 }
 
 export default [greeting, welcome, offerHelp, ...orderNarrative, ...paymentNarrative, goodbye]

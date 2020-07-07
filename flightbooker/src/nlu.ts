@@ -1,7 +1,7 @@
 import { Intent, entities } from "narratory"
 
 export const Yes: Intent = {
-  examples: ["yeah", "yes", "of course", "absolutely", "yep"],
+  examples: ["yeah", "yes", "of course", "absolutely", "yep", "it does", "yea", "sure", "yup", "great"],
 }
 
 export const No: Intent = {
@@ -38,6 +38,7 @@ export const travel: Intent = {
     "fly to _toCity from _fromCity",
     "fly from _fromCity to _toCity",
     "I wanna go to _toCity",
+    "I want _tickets tickets to _toCity"
   ],
   entities: {
     tickets: entities.numberInteger,
@@ -47,7 +48,7 @@ export const travel: Intent = {
 }
 
 export const peopleTravelling: Intent = {
-  examples: ["_tickets", "_tickets people", "_tickets tickets", "we are _tickets", "no we are _tickets", "no _tickets"],
+  examples: ["_tickets", "_tickets people", "_tickets tickets", "we are _tickets", "we aer __tickets", "no we are _tickets", "no _tickets"],
   entities: {
     tickets: entities.numberInteger,
   },
@@ -112,4 +113,33 @@ export const weatherQuery: Intent = {
   entities: {
     weatherCity: entities.geoCity,
   },
+}
+
+export const greeting: Intent = {
+  examples: ["hello", "hi", "hey", "what's up", "hej", "hallå", "hiya", "yello"]
+}
+
+export const help: Intent = {
+  examples: ["I don't know", 
+  "idk", 
+  "you tell me", 
+  "About that I can ask", 
+  "What can I ask", 
+  "dunno", 
+  "tell me what you can do",
+  "can you help",
+  "what can you do",
+  "what are you able to help with",
+  "how do i book a flight",
+],
+}
+
+export const askQuestion: Intent = {
+  examples: [
+    "can i ask you something",
+    "can i ask a question",
+    "i have a question", 
+    "i am wondering something",
+    "can you tell me something",
+  ]
 }

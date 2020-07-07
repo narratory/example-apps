@@ -53,4 +53,31 @@ const queryWeather: UserTurn = {
 ]
 }
 
-export const userInitiatives = [bookFlightIntent, queryFunction, queryCost, queryWeather, exitIntent]
+const greeting: UserTurn = {
+  intent: intents.greeting,
+  bot: ["Hi there!", "Hello!", "Hi!"]
+}
+
+const help: UserTurn = {
+  intent: intents.help,
+bot: {
+  say: "If you need help to book tickets for an upcoming trip, I'm here to help.",
+  bot: {
+    say: "Let's start. Tell me where would you like to go?",
+  repair: true,
+}
+}
+}
+
+const askQuestion: UserTurn = {
+  intent: intents.askQuestion,
+  bot: {
+    say: "I'm a slot-filling bot, which means that I can help you book tickets for an upcoming trip.",
+    bot: {
+      say: "Let's start. Tell me where would you like to go?",
+      repair: true,
+    }
+  }
+}
+
+export const userInitiatives = [bookFlightIntent, queryFunction, queryCost, queryWeather, exitIntent, greeting, help, askQuestion]

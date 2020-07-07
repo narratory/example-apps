@@ -52,6 +52,12 @@ export const queryHumanHandover : Intent = {
     "I wanna talk to a person",
     "speak with real person",
     "talk to operator",
-    "give me a person"
+    "give me a person",
+    "i want to talk to someone",
+    "how to talk with the employee"
   ]
+}
+
+export const greeting: Intent = {
+  examples: ["hello", "hi", "hey", "what's up", "hej", "hallå", "hiya"]
 }

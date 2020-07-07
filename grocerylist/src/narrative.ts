@@ -1,10 +1,10 @@
-import { BotTurn } from "narratory"
+import { BotTurn, ANYTHING } from "narratory"
 import * as intents from "./nlu"
 import { confirmRemovingProduct } from "./partials"
 
 // Our greeting state, and setting up some initial variables
 const greeting: BotTurn = {
-  say: ["Welcome to the grocery store", "Welcome to the grocery shopper"],
+  say: ["Welcome to the grocery store.", "Welcome to the grocery shopper."],
   set: {
     groceryList: [], // Set an empty list to begin with
     initial: true // Used for condition in the modifyList turn
@@ -12,7 +12,7 @@ const greeting: BotTurn = {
 }
 
 const purpose: BotTurn = {
-  say: ["I can help you by creating a shopping list", "I'll help you create a shopping list"]
+  say: ["I can help you by creating a shopping list.", "I'll help you create a shopping list."]
 }
 
 // Our main state
@@ -33,14 +33,14 @@ const modifyList: BotTurn = {
           say: [
             "Absolutely. _product.",
             "Okay, adding _product to the list.",
-            "Great, _product. List is now _groceryList."
+            "Great, _product. You have now got _groceryList on your list."
           ],
           set: {
             groceryList: "+_product"
           }
         },
         {
-          say: ["Sorry. I don't have that", "Unfortunately, I don't have that"]
+          say: ["Sorry. I don't have that.", "Unfortunately, I don't have that."]
         }
       ]
     },
@@ -64,13 +64,13 @@ const modifyList: BotTurn = {
           say: "I can't do that, you don't have _product on the list."
         },
         {
-          say: "That is not a product I have, or I failed to understand you. Try again!"
+          say: "Sorry, I don't know that product yet. I will tell my developers to teach me what it is."
         }
       ]
     },
     {
       intent: intents.queryProducts,
-      bot: "We have most products you'd expect a grocery store to have. And our daily specials"
+      bot: "We have most products you'd expect a grocery store to have. And our daily specials."
     },
     {
       /*
@@ -94,10 +94,10 @@ const modifyList: BotTurn = {
         bot: [
           {
             cond: { todaysSpecials: true },
-            say: "Our specials today are _todaysSpecials"
+            say: "Our specials today are _todaysSpecials."
           },
           {
-            say: "Sorry, no specials today"
+            say: "Sorry, no specials today."
           }
         ]
       }
@@ -120,7 +120,7 @@ const modifyList: BotTurn = {
               set: {
                 groceryList: null
               },
-              say: "As you wish! List is empty. What do you want to add to it?",
+              say: "As you wish! Your list is now empty. What do you want to add to it?",
               repair: "PARENT" // Since we don't want to execute the continueModifying turn below
             }
           }
@@ -134,15 +134,21 @@ const modifyList: BotTurn = {
     {
       intent: intents.NotSure,
       bot: {
-        say: "No problems. Take your time",
+        say: "No problems. Take your time.",
         repair: true // Since we don't want to proceed and prompt the user again
       }
     },
     {
       intent: intents.No,
       bot: {
-        say: "Alright",
+        say: "Alright.",
         goto: "SUMMARY"
+      }
+    },
+    {
+      intent: ANYTHING,
+      bot: {
+        say: "Sorry, I don't know that product yet. I will tell my developers to teach me what it is.",
       }
     }
   ]
@@ -177,7 +183,7 @@ const continueModifying: BotTurn = {
 
 const summary: BotTurn = {
   label: "SUMMARY",
-  say: ["The final list is _groceryList", "Now, your final list contains _groceryList"]
+  say: ["The final list is _groceryList.", "Now, your final list contains _groceryList."]
 }
 
 const goodbye = "Thank you and goodbye for now!"
