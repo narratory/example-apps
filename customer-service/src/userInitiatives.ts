@@ -1,6 +1,5 @@
 import { UserTurn } from "narratory"
 import * as nlu from "./nlu"
-import { orderNarrative } from "./order/queryOrder"
 
 /*
     Questions and other user-driven initiatives
