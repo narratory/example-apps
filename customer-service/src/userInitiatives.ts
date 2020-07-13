@@ -1,5 +1,5 @@
 import { UserTurn } from "narratory"
-import * as nlu from "./nlu"
+import * as nlu from "./nlu" 
 
 /*
     Questions and other user-driven initiatives
@@ -16,9 +16,18 @@ const humanHandover: UserTurn = {
       goto: "__HANDOVER",
     },
     {
-      say: "I can't do this on this chat-client unfortunately",
+      say: "Ah, you want to talk to a human! I will be able to connect you with one as soon as my developers teach me how.",
+      set: {
+        helped: true,
+        goto: "OFFER_HELP",
     },
+  },
   ],
 }
 
-export default [humanHandover]
+const greeting: UserTurn = {
+  intent: nlu.greeting,
+  bot: ["Hi there!", "Hello!", "Hi!"]
+}
+
+export default [humanHandover, greeting]

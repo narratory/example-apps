@@ -475,5 +475,12 @@
   { "name": "chocolate bar" },
   { "name": "candy bar" },
   { "name": "taffyfudge" },
-  { "name": "marshmallow" }
+  { "name": "marshmallow" },
+  { "name": "icecream"},
+  { "name": "ice cream"},
+  { "name": "coke"},
+  { "name": "soft drinks" },
+  { "name": "soda" },
+  { "name": "tumeric" },
+  { "name": "sugar" }
 ]

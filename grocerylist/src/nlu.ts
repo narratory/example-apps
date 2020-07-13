@@ -5,7 +5,7 @@ export const Yes: Intent = {
 }
 
 export const No: Intent = {
-  examples: ["no", "never", "nope", "I don't think so", "noes"]
+  examples: ["no", "never", "nope", "I don't think so", "noes", "nothing", "nohting"]
 }
 
 export const NotSure: Intent = {
@@ -68,7 +68,10 @@ export const queryProducts: Intent = {
     "what can I buy",
     "what is in stock",
     "what groceries do you have",
-    "what can I add"
+    "what can I add",
+    "what's available",
+    "what have you got available",
+    "what is available",
   ]
 }
 
@@ -84,5 +87,5 @@ export const querySpecials: Intent = {
 }
 
 export const resetList: Intent = {
-  examples: ["Reset the list", "restart", "empty the list", "empty it"]
+  examples: ["Reset the list", "restart", "empty the list", "empty it", "kill order"]
 }

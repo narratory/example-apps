@@ -1,8 +1,8 @@
 import { BotTurn, ANYTHING, EXIT } from "narratory"
 import * as nlu from "./nlu"
-import { ASK_TICKETS } from "./util"
+import { ASK_TICKETS, TO_CITY } from "./util"
 
-const greeting = ["Hi there", "Hello", "Hi"]
+const greeting = ["Hi there!", "Hello!", "Hi!"]
 
 // Booking turn, allowing users to start of with a booking by saying for example "I want to fly to Paris from Stockholm"
 // or to enter a slot-filling dialog if they simply reply "Yes".
@@ -10,8 +10,8 @@ const greeting = ["Hi there", "Hello", "Hi"]
 const askBooking: BotTurn = {
   say: ["Do you want to book a flight?", "How about booking a flight?"],
   user: [
-    { intent: nlu.travel, bot: ["Excellent", "Sounds great"] }, // This intent (defined in nlu.ts) does most of the magic here
-    { intent: nlu.Yes, bot: "Alright" },
+    { intent: nlu.travel, bot: ["Excellent!", "Sounds great!"] }, // This intent (defined in nlu.ts) does most of the magic here
+    { intent: nlu.Yes, bot: "Alright." },
     {
       intent: nlu.No,
       bot: {
@@ -22,8 +22,11 @@ const askBooking: BotTurn = {
     {
       intent: ANYTHING,
       bot: {
-        say: "You can for example say that you want to fly to New York from Stockholm",
-        repair: true,
+        say: ["Sorry, I didn't get that. How about you tell me where you want to go?"],
+        bot: {
+          say: nlu.flyTo,
+          repair: true,
+        },
       },
     },
   ],
@@ -32,21 +35,29 @@ const askBooking: BotTurn = {
 // Slot filling turns follow, filling in the missing slots. See https://narratory.io/docs/slot-filling
 
 const askTo: BotTurn = {
+  label: TO_CITY,
   cond: { toCity: null },
   say: "Where do you wanna go to?",
   user: [
     {
       intent: nlu.travelTo,
       bot: {
-        say: "To _city, got it",
+        say: "To _city, got it.",
         set: { toCity: "_city" },
       },
     },
     {
       intent: nlu.city,
       bot: {
-        say: `_city, understood`,
+        say: `_city, understood.`,
         set: { toCity: "_city" },
+      },
+    },
+    {
+      intent: ANYTHING,
+      bot: {
+        say: "Please state the city you want to fly to, for example Stockholm, Paris or Berlin.",
+        repair: true,
       },
     },
   ],
@@ -59,15 +70,22 @@ const askFrom: BotTurn = {
     {
       intent: nlu.travelFrom,
       bot: {
-        say: `From _city, got it`,
+        say: `From _city, got it.`,
         set: { fromCity: "_city" },
       },
     },
     {
       intent: nlu.city,
       bot: {
-        say: `_city, understood`,
+        say: `_city, understood.`,
         set: { fromCity: "_city" },
+      },
+    },
+    {
+      intent: ANYTHING,
+      bot: {
+        say: "Please state the city you want to fly from, for example Berlin, Paris or Stockholm.",
+        repair: true,
       },
     },
   ],
@@ -77,7 +95,10 @@ const askTickets: BotTurn = {
   label: ASK_TICKETS,
   cond: { tickets: null },
   say: "How many people are travelling?",
-  user: [{ intent: nlu.peopleTravelling, bot: "How nice, _tickets people." }],
+  user: [
+    { intent: nlu.peopleTravelling, bot: "How nice, _tickets people." },
+    { intent: ANYTHING, bot: { say: "Sorry, how many people did you say were travelling?", repair: true } },
+  ],
 }
 
 // Confirmation turn, allowing the user to change any of the slots. Once happy, a booking is
@@ -88,7 +109,7 @@ const confirm: BotTurn = {
     {
       intent: nlu.travelFrom,
       bot: {
-        say: "Ok, sorry. _city it is. Otherwise we are good?",
+        say: "Ok, sorry. _city it is. Otherwise, are we good?",
         set: { fromCity: "_city" },
         repair: true,
       },
@@ -96,7 +117,7 @@ const confirm: BotTurn = {
     {
       intent: nlu.travelTo,
       bot: {
-        say: "Ok, sorry. Going to _city. Otherwise we are good?",
+        say: "Ok, sorry. Going to _city. Otherwise are we good?",
         set: { toCity: "_city" },
         repair: true,
       },
@@ -109,22 +130,23 @@ const confirm: BotTurn = {
       },
     },
     {
-      intent: ["No", "It is not good", "wrong"],
+      intent: nlu.changeBooking,
       bot: {
         say: "Okay. What do you want to correct?",
         repair: true,
       },
     },
     {
-      intent: ["It is ok", "OK", "great", "yes"],
+      intent: nlu.Yes,
       bot: {
         // Booking state. See https://narratory.io/docs/transactions
+        cond: {platform: "Google"},
         orderType: "BOOK",
         name: "A flight to _toCity",
         description: "_tickets tickets to _toCity from _fromCity",
         confirmationText: "Flight booked",
         onConfirmed: {
-          say: "Awesome, order sent",
+          say: "Awesome, order sent!",
           set: {
             booked: true,
           },
@@ -133,21 +155,32 @@ const confirm: BotTurn = {
           // params: ["toCity", "fromCity", "tickets"],
         },
         onCancelled: {
-          say: "Okay. Order cancelled",
+          say: "Okay. Order cancelled.",
         },
+        bot: {
+          say: "Here, I would send you a confirmation for the booking of your flight. However, since you are currently not on the Google platform, that is beyond the scope of this demo.",
       },
+    }
     },
     {
       intent: ["Abort"],
       bot: {
-        say: "Okay, aborting",
+        say: "Okay, aborting.",
+      },
+    },
+    {
+      intent: ANYTHING,
+      bot: {
+        say:
+          "Sorry, I missed that detail. I really want get you onto the right flight, so could you please confirm whether this itinerary sounds right to you?",
+        repair: true,
       },
     },
   ],
 }
 
 const anotherBooking: BotTurn = {
-  say: ["Do you want to do another booking?", "Do you want to book another flight?"],
+  say: ["Do you want to try to make another booking with me?", "Do you want to try to book another flight with me?"],
   set: {
     // Resetting all variables
     toCity: null,
@@ -158,20 +191,30 @@ const anotherBooking: BotTurn = {
     {
       intent: nlu.travel,
       bot: {
-        say: ["Excellent", "Sounds great"],
+        say: ["Excellent.", "Sounds great."],
         goto: ASK_TICKETS,
       },
     },
     {
       intent: nlu.Yes,
       bot: {
-        say: "Alright",
-        goto: ASK_TICKETS,
+        say: "Alright.",
+        goto: TO_CITY,
       },
     },
     {
       intent: nlu.No,
       bot: "Okay, no problem!",
+    },
+    {
+      intent: ANYTHING,
+      bot: {
+        say: "Sorry, I didn't get that. How about you tell me where you want to go?",
+        bot: {
+          say: nlu.flyTo,
+          repair: true,
+        },
+      },
     },
   ],
 }

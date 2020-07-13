@@ -3,14 +3,15 @@ import * as nlu from "./nlu"
 import { endSession } from "./partials"
 import { orderNarrative } from "./order/queryOrder"
 import { paymentNarrative } from "./payment/queryPayment"
+import userInitiatives from "./userInitiatives"
 
 /* 
     Narrative, i.e the bot-driven interaction
 */
 
-const greeting = ["Hi there", "Greetings", "Hello"]
+const greeting = ["Hi there!", "Greetings!", "Hello!"]
 
-const welcome = "Welcome to the one-size-fits-noone T-shirt store customer service"
+const welcome = "Welcome to the one-size-fits-noone T-shirt store customer service."
 
 const offerHelp: BotTurn = {
   label: "OFFER_HELP",
@@ -44,45 +45,63 @@ const offerHelp: BotTurn = {
         {
           say: "Sorry, was that a problem with your payment or your order?",
           repair: true
-        }
+        },
       ]
     },
     {
       intent: nlu.Yes,
       bot: {
-        say: "Is that problems with your order, or maybe with your payment?",
+        say: "Is there a problem with your order, or maybe with your payment?",
         repair: true
       }
     },
     {
       intent: nlu.No,
       bot: {
-        say: "Okay",
+        say: "Okay.",
         goto: "END"
       }
     },
+    {
+    intent: nlu.product,
+    bot: {
+      say: "I will be able to help out with products soon. For now, I can only help you with problems regarding your order or your payment.",
+      bot: {
+        say: "Can I help you with something else?",
+        repair: true,
+      }
+    },
+},
+{
+  intent: nlu.idk,
+  bot: {
+    say: "I can help you with either your order or your payment.",
+    repair: true,
+  }
+},
     {
       intent: ANYTHING,
       bot: [
         {
           cond: { turnCount: 0 },
-          say: "For now, I can only help with questions about orders or payments",
+          say: "Sorry, I didn't get that. Please let me know if you need help with either an order or a payment.",
           repair: true
         },
         {
           cond: { turnCount: 1 },
-          say: "Try saying that you have a problem with your order or your payment",
+          say: "Try to state whether your problem is regarding your order or your payment.",
           repair: true
         },
         endSession
       ]
-    }
+    },
+    ...userInitiatives
   ]
 }
 
 const goodbye: BotTurn = {
   label: "END",
-  say: ["Thanks for today. Goodbye!", "Thanks, goodbye!"]
+  say: ["Thank you for today. Goodbye!", "Thanks, goodbye!"]
 }
 
 export default [greeting, welcome, offerHelp, ...orderNarrative, ...paymentNarrative, goodbye]

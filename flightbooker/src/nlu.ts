@@ -1,7 +1,7 @@
 import { Intent, entities } from "narratory"
 
 export const Yes: Intent = {
-  examples: ["yeah", "yes", "of course", "absolutely", "yep"],
+  examples: ["yeah", "yes", "of course", "absolutely", "yep", "it does", "yea", "sure", "yup", "great", "It is ok", "OK", "sure", "alright", "all good"],
 }
 
 export const No: Intent = {
@@ -38,6 +38,7 @@ export const travel: Intent = {
     "fly to _toCity from _fromCity",
     "fly from _fromCity to _toCity",
     "I wanna go to _toCity",
+    "I want _tickets tickets to _toCity"
   ],
   entities: {
     tickets: entities.numberInteger,
@@ -47,7 +48,7 @@ export const travel: Intent = {
 }
 
 export const peopleTravelling: Intent = {
-  examples: ["_tickets", "_tickets people", "_tickets tickets", "we are _tickets", "no we are _tickets", "no _tickets"],
+  examples: ["_tickets", "_tickets people", "_tickets tickets", "we are _tickets", "we aer _tickets", "no we are _tickets", "no _tickets"],
   entities: {
     tickets: entities.numberInteger,
   },
@@ -113,3 +114,51 @@ export const weatherQuery: Intent = {
     weatherCity: entities.geoCity,
   },
 }
+
+export const greeting: Intent = {
+  examples: ["hello", "hi", "hey", "what's up", "hej", "hallå", "hiya", "yello"]
+}
+
+export const help: Intent = {
+  examples: ["I don't know", 
+  "idk", 
+  "you tell me", 
+  "About that I can ask", 
+  "What can I ask", 
+  "dunno", 
+  "tell me what you can do",
+  "can you help",
+  "what can you do",
+  "what are you able to help with",
+  "how do i book a flight",
+],
+}
+
+export const askQuestion: Intent = {
+  examples: [
+    "can i ask you something",
+    "can i ask a question",
+    "i have a question", 
+    "i am wondering something",
+    "can you tell me something",
+  ]
+}
+
+export const changeBooking: Intent = {
+  examples: [
+    "No", "It is not good", "wrong", "change mind", "I want to change", "I made a mistake", "I wrote wrong", "not really"
+  ]
+}
+
+export const flyTo =
+[
+    "You can for example say that you want to fly to New York from Stockholm.",
+    "You can for example say that you want to fly to London from Paris.",
+    "You can for example say that you want to fly to Los Angeles from Copenhagen",
+    "You can for example say that you want to fly to Oslo from Rome.",
+    "You can for example say that you want to fly to Taipei from Seoul.",
+    "You can for example say that you want to fly to Osaka to Singapore.",
+    "You can for example say that you want to fly to Barcelona to Warsaw.",
+    "You can for example say that you want to fly to Helsinki to Milan.",
+    "You can for example say that you want to fly to Lissabon to Madrid.",
+  ]

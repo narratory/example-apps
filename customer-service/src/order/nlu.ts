@@ -38,6 +38,7 @@ export const wrongColor : Intent = {
         "I don't want it in _newColor",
         "I do not want it in _wrongColor",
         "I don't like _wrongColor",
-        "I wanna change it to _newColor"
+        "I wanna change it to _newColor",
+        "I have the wrong color",
     ]
 }

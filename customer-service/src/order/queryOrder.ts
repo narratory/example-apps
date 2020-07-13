@@ -8,7 +8,7 @@ const queryProblem: BotTurn = {
   user: [
     {
       intent: nlu.wrongQuantity,
-      bot: "You ordered the wrong amount of products? That happens"
+      bot: "You ordered the wrong amount of products? That happens."
     },
     {
       intent: nlu.notDelivered,
@@ -16,7 +16,7 @@ const queryProblem: BotTurn = {
     },
     {
       intent: nlu.wrongColor,
-      bot: "Oh, the wrong color you say? I also change my mind sometimes"
+      bot: "Oh, the wrong color you say? I also change my mind sometimes."
     },
     {
       intent: ANYTHING,
@@ -43,6 +43,7 @@ const queryProblem: BotTurn = {
 }
 
 const queryOrderNumber: BotTurn = {
+  label: "ORDER_NUMBER",
   say: ["For me to help you, I need your order number", "Can I please have your order number?"],
   user: [{ intent: ANYTHING, bot: beyondDemo }]
 }

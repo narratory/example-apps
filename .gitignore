@@ -2,3 +2,10 @@
 **/out
 **/google_credentials.json
 **/narratory_credentials.json
+customer-service/narratory_credentials.json
+customer-service/narratory_credentials.json
+flightbooker/google_credentials.json
+flightbooker/narratory_credentials.json
+grocerylist/google_credentials.json
+grocerylist/narratory_credentials.json
+customer-service/narratory_credentials.json
