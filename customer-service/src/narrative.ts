@@ -3,6 +3,7 @@ import * as nlu from "./nlu"
 import { endSession } from "./partials"
 import { orderNarrative } from "./order/queryOrder"
 import { paymentNarrative } from "./payment/queryPayment"
+import userInitiatives from "./userInitiatives"
 
 /* 
     Narrative, i.e the bot-driven interaction
@@ -62,7 +63,7 @@ const offerHelp: BotTurn = {
       }
     },
     {
-    intent: ["product"],
+    intent: nlu.product,
     bot: {
       say: "I will be able to help out with products soon. For now, I can only help you with problems regarding your order or your payment.",
       bot: {
@@ -70,6 +71,13 @@ const offerHelp: BotTurn = {
         repair: true,
       }
     },
+},
+{
+  intent: nlu.idk,
+  bot: {
+    say: "I can help you with either your order or your payment.",
+    repair: true,
+  }
 },
     {
       intent: ANYTHING,
@@ -87,23 +95,7 @@ const offerHelp: BotTurn = {
         endSession
       ]
     },
-    {
-      intent: nlu.queryHumanHandover,
-      bot:  
-      { say: "Ah, you want to talk to a human! I will be able to connect you with one as soon as my developers teach me how.",
-      bot: {
-        say: "Do you need help you with your order or your payment? I can help you with that.",
-        repair: true,
-      }
-    }
-    },
-    {
-      intent: ["I don't know", "idk", "you tell me", "About that I can ask", "What can I ask", " I can ask about number of requested", "dunno"],
-      bot: {
-        say: "I can help you with either your order or your payment.",
-        repair: true,
-      }
-    }
+    ...userInitiatives
   ]
 }
 

@@ -72,7 +72,7 @@ bot: {
 const askQuestion: UserTurn = {
   intent: intents.askQuestion,
   bot: {
-    say: "I'm a slot-filling bot, which means that I can help you book tickets for an upcoming trip.",
+    say: "I mainly handle bookings. If you want to book tickets for an upcoming trip, I can help you.",
     bot: {
       say: "Let's start. Tell me where would you like to go?",
       repair: true,

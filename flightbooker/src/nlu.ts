@@ -1,7 +1,7 @@
 import { Intent, entities } from "narratory"
 
 export const Yes: Intent = {
-  examples: ["yeah", "yes", "of course", "absolutely", "yep", "it does", "yea", "sure", "yup", "great"],
+  examples: ["yeah", "yes", "of course", "absolutely", "yep", "it does", "yea", "sure", "yup", "great", "It is ok", "OK", "sure", "alright", "all good"],
 }
 
 export const No: Intent = {
@@ -48,7 +48,7 @@ export const travel: Intent = {
 }
 
 export const peopleTravelling: Intent = {
-  examples: ["_tickets", "_tickets people", "_tickets tickets", "we are _tickets", "we aer __tickets", "no we are _tickets", "no _tickets"],
+  examples: ["_tickets", "_tickets people", "_tickets tickets", "we are _tickets", "we aer _tickets", "no we are _tickets", "no _tickets"],
   entities: {
     tickets: entities.numberInteger,
   },
@@ -143,3 +143,22 @@ export const askQuestion: Intent = {
     "can you tell me something",
   ]
 }
+
+export const changeBooking: Intent = {
+  examples: [
+    "No", "It is not good", "wrong", "change mind", "I want to change", "I made a mistake", "I wrote wrong", "not really"
+  ]
+}
+
+export const flyTo =
+[
+    "You can for example say that you want to fly to New York from Stockholm.",
+    "You can for example say that you want to fly to London from Paris.",
+    "You can for example say that you want to fly to Los Angeles from Copenhagen",
+    "You can for example say that you want to fly to Oslo from Rome.",
+    "You can for example say that you want to fly to Taipei from Seoul.",
+    "You can for example say that you want to fly to Osaka to Singapore.",
+    "You can for example say that you want to fly to Barcelona to Warsaw.",
+    "You can for example say that you want to fly to Helsinki to Milan.",
+    "You can for example say that you want to fly to Lissabon to Madrid.",
+  ]
