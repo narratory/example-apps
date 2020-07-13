@@ -61,3 +61,11 @@ export const queryHumanHandover : Intent = {
 export const greeting: Intent = {
   examples: ["hello", "hi", "hey", "what's up", "hej", "hallå", "hiya"]
 }
+
+export const product: Intent = {
+  examples: ["product", "goods", "brand", "merchandise", "commodity", "things", "manufacturing", "creations"]
+}
+
+export const idk: Intent = {
+  examples: ["I don't know", "idk", "you tell me", "About that I can ask", "What can I ask", " I can ask about number of requested", "dunno"]
+}

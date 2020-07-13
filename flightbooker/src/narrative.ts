@@ -24,10 +24,7 @@ const askBooking: BotTurn = {
       bot: {
         say: ["Sorry, I didn't get that. How about you tell me where you want to go?"],
         bot: {
-          say: [
-            "You can for example say that you want to fly to New York from Stockholm.",
-            "You can for example say that you want to fly to Paris from Berlin.",
-          ],
+          say: nlu.flyTo,
           repair: true,
         },
       },
@@ -133,17 +130,17 @@ const confirm: BotTurn = {
       },
     },
     {
-      intent: ["No", "It is not good", "wrong", "change mind", "I want to change", "I made a mistake", "I wrote wrong", "not really"],
+      intent: nlu.changeBooking,
       bot: {
         say: "Okay. What do you want to correct?",
         repair: true,
       },
     },
     {
-      intent: ["It is ok", "OK", "great", "yes"],
-      /*
+      intent: nlu.Yes,
       bot: {
         // Booking state. See https://narratory.io/docs/transactions
+        cond: {platform: "Google"},
         orderType: "BOOK",
         name: "A flight to _toCity",
         description: "_tickets tickets to _toCity from _fromCity",
@@ -160,11 +157,10 @@ const confirm: BotTurn = {
         onCancelled: {
           say: "Okay. Order cancelled.",
         },
+        bot: {
+          say: "Here, I would send you a confirmation for the booking of your flight. However, since you are currently not on the Google platform, that is beyond the scope of this demo.",
       },
-    },*/
-      bot: {
-        say: "Here, I would help you make a purchase through the Google Assistant API. However, that is beyond the scope of this demo.",
-      },
+    }
     },
     {
       intent: ["Abort"],
@@ -213,12 +209,9 @@ const anotherBooking: BotTurn = {
     {
       intent: ANYTHING,
       bot: {
-        say: ["Sorry, I didn't get that. How about you tell me where you want to go?"],
+        say: "Sorry, I didn't get that. How about you tell me where you want to go?",
         bot: {
-          say: [
-            "You can for example say that you want to fly to New York from Stockholm.",
-            "You can for example say that you want to fly to Paris from Berlin.",
-          ],
+          say: nlu.flyTo,
           repair: true,
         },
       },
